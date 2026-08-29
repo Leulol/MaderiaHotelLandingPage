@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Clean White/Light Background for High Contrast -->
+  <rect x="0" y="0" width="64" height="64" rx="16" fill="#FFFFFF" />
+  
+  <g transform="translate(4, 2)">
+    <!-- Letter M -->
+    <path d="M 12 44 V 20 L 22 34 L 32 20 V 44" fill="none" stroke="#4338CA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Letter D fused to M -->
+    <path d="M 32 20 H 38 C 45 20 48 25 48 32 C 48 39 45 44 38 44 H 32" fill="none" stroke="#4338CA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Emerald Status Dot (System Ready Indicator) -->
+    <circle cx="44" cy="18" r="4" fill="#10B981" />
+  </g>
+</svg>

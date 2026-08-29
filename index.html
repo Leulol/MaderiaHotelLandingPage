@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maderia Hotel — Pricing & Live Demo for Hotels</title>
+  <link rel="icon" type="image/svg+xml" href="tab-logo.svg" />
+
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F3F4F6;
+      --surface: rgba(255, 255, 255, 0.85);
+      --surface-solid: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --border: rgba(226, 232, 240, 0.8);
+
+      /* Vibrant Color Palette */
+      --brand-primary: #4338CA; /* Deep Indigo */
+      --brand-primary-hover: #3730A3;
+      --brand-accent: #10B981; /* Emerald Green */
+      --brand-accent-light: #D1FAE5;
+      --gradient-text: linear-gradient(135deg, #4338CA, #06B6D4);
+      --gradient-bg: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 50%, #CCFBF1 100%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--gradient-bg);
+      background-attachment: fixed;
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Sticky Glass Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .header-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .header-nav a:hover { color: var(--brand-primary); }
+
+    @media (max-width: 640px) {
+      .header-nav { display: none; }
+      .header-inner { justify-content: center; }
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+      color: var(--brand-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .logo-badge {
+      background: var(--brand-accent-light);
+      color: #047857;
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 2px;
+    }
+
+    /* Wide Layout */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .top-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 56px 0 12px 0;
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(67, 56, 202, 0.1);
+      color: var(--brand-primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(67, 56, 202, 0.2);
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .btn-hero-primary {
+      background: var(--brand-primary);
+      color: #FFFFFF;
+      box-shadow: 0 10px 20px -10px var(--brand-primary);
+    }
+    .btn-hero-primary:hover { background: var(--brand-primary-hover); transform: translateY(-2px); }
+
+    .btn-hero-secondary {
+      background: var(--surface-solid);
+      color: var(--brand-primary);
+      border: 2px solid var(--border);
+    }
+    .btn-hero-secondary:hover { border-color: var(--brand-primary); }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero { padding: 40px 0; }
+    }
+
+    /* Premium Cards */
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid #FFFFFF;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow:
+        0 20px 40px -15px rgba(0, 0, 0, 0.05),
+        0 0 0 1px rgba(255,255,255,0.5) inset;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .card { padding: 24px; }
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Decorative Image */
+    .card-image-bg {
+      width: 100%;
+      height: 200px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      background-image: url('https://cdn.prod.website-files.com/601a133a769fa8f8d45d95ba/6a6126012320d54c40884213_dash.svg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .card-image-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      border-radius: 16px;
+    }
+
+    .image-overlay-text {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: white;
+      z-index: 2;
+    }
+
+    /* UI Mockup Details */
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .preview-title { font-weight: 700; font-size: 1.1rem; }
+    .date-pill { font-size: 0.85rem; color: var(--brand-primary); background: rgba(67, 56, 202, 0.1); padding: 6px 12px; border-radius: 8px; font-weight: 600;}
+
+    .mockup-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mockup-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px -5px rgba(0,0,0,0.05);
+    }
+
+    .mockup-info div { font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
+    .mockup-info span { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 99px;
+      letter-spacing: 0.02em;
+    }
+    .status-paid { background: #DCFCE7; color: #166534; }
+    .status-unpaid { background: #FEE2E2; color: #991B1B; }
+
+    /* Feature Grid (Why Choose Maderia Hotel) */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .mission-item {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 16px;
+      text-align: left;
+    }
+
+    .mission-item h4 { font-size: 1rem; color: var(--brand-primary); margin-bottom: 8px; font-weight: 700;}
+    .mission-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;}
+
+    @media (max-width: 600px) {
+      .mission-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Pricing — single flat plan, no tiers */
+    .pricing-single-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pricing-card {
+      background: var(--surface-solid);
+      border: 2px solid var(--brand-primary);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .pricing-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+    .pricing-tagline { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
+    .pricing-amount { font-size: 1.9rem; font-weight: 800; color: var(--text-main); }
+    .pricing-amount small { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
+    .pricing-upfront { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .pricing-features li {
+      font-size: 0.9rem;
+      padding: 8px 0;
+      padding-left: 28px;
+      position: relative;
+      color: var(--text-main);
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--brand-accent);
+      font-weight: 800;
+    }
+
+    .pricing-best-for {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+
+    .btn-pricing {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      background: var(--brand-primary);
+      color: #FFFFFF;
+      transition: all 0.2s ease;
+    }
+
+    .btn-pricing:hover { opacity: 0.9; }
+
+    .pricing-guidance {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      background: rgba(67, 56, 202, 0.05);
+      border: 1px solid rgba(67, 56, 202, 0.15);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    /* Live Demo */
+    .credential-card {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .credential-role { font-weight: 800; font-size: 1.05rem; margin-bottom: 4px; }
+    .credential-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; }
+
+    .credential-box {
+      background: #0F172A;
+      color: #E2E8F0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+    .credential-box b { color: #FFFFFF; }
+
+    .credential-steps {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      padding-left: 20px;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .btn-launch {
+      display: inline-block;
+      background: var(--brand-accent);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+    .btn-launch:hover { background: #0E9E6F; }
+
+    .demo-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Form Styles */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      background: var(--surface-solid);
+      transition: all 0.2s ease;
+      color: var(--text-main);
+    }
+
+    .form-control:focus {
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 4px rgba(67, 56, 202, 0.15);
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 30px;
+      background: var(--brand-primary);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px -10px var(--brand-primary);
+    }
+
+    .btn-submit:hover {
+      background: var(--brand-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 25px -10px var(--brand-primary);
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 16px;
+      font-weight: 500;
+    }
+
+    .text-field { display: none; margin-top: 12px; }
+
+    .site-footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Dynamic Scroll Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">
+        Maderia <span class="logo-badge">Hotel</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#pricing">Pricing</a>
+        <a href="#demo">Live Demo</a>
+        <a href="#get-started">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- 1. Hero Section -->
+    <section class="hero fade-up">
+      <span class="hero-tag">Built for Ethiopian Hotels</span>
+      <h1>Staff and payroll, finally in one place.</h1>
+      <p>Employee rosters, department payroll cycles, attendance, and payment history — designed for hotels of any size. Log into the real, live app with a demo account, no signup required.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-hero btn-hero-primary">See Pricing</a>
+        <a href="#demo" class="btn-hero btn-hero-secondary">Try Live Demo</a>
+      </div>
+    </section>
+
+    <!-- 2 & 3. Dashboard Preview + Why Choose Maderia Hotel, side by side -->
+    <div class="top-grid">
+
+    <!-- 2. Dashboard Preview Card -->
+    <div class="card fade-up">
+      <div class="card-image-bg">
+          <div class="image-overlay-text">
+              <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.2rem;">Payroll at a Glance</h3>
+              <p style="font-size: 0.85rem; opacity: 0.9;">Real-time payroll insights.</p>
+          </div>
+      </div>
+
+      <div class="preview-header">
+        <span class="preview-title">Employee Roster & Payroll</span>
+        <span class="date-pill">Current Cycle</span>
+      </div>
+
+      <div style="margin-bottom: 30px;">
+        <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase;">Recent Activity</div>
+
+        <div class="mockup-item">
+          <div class="mockup-info">
+            <div>Selam Tesfaye</div>
+            <span>Kitchen • Cash</span>
+          </div>
+          <span class="status-badge status-paid">Paid (4,500 ETB)</span>
+        </div>
+
+        <div class="mockup-item">
+          <div class="mockup-info">
+            <div>Abebe Kebede</div>
+            <span>Housekeeping</span>
+          </div>
+          <span class="status-badge status-unpaid">Unpaid</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase;">Included in Every Setup</div>
+        <ul style="font-size: 0.9rem; color: var(--text-main); font-weight: 500; padding-left: 20px; line-height: 1.8;">
+          <li>Employee rosters & department assignment</li>
+          <li>Automatic, prorated payroll cycles</li>
+          <li>Daily 1-click attendance tracking</li>
+          <li>Real-time payroll dashboard</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Why Choose Maderia Hotel -->
+    <div class="card fade-up">
+      <div class="section-header">
+        <h2>Why Hotels Choose Maderia</h2>
+        <p>Spreadsheets lose track of who's been paid. Enterprise HR software is overkill for a single property. Maderia is the lightweight sweet spot — live and already running a real hotel today.</p>
+      </div>
+
+      <div class="mission-grid">
+        <div class="mission-item">
+          <h4>Departments, Organized</h4>
+          <p>Group staff into departments — Kitchen, Housekeeping, Front Desk — each with its own payroll cycle length and base rate.</p>
+        </div>
+        <div class="mission-item">
+          <h4>Payroll That Prorates Itself</h4>
+          <p>Hire someone mid-cycle and their first payment is automatically prorated to the days they actually worked — no manual math.</p>
+        </div>
+        <div class="mission-item">
+          <h4>Attendance in One Tap</h4>
+          <p>Mark a whole shift Present or Absent in seconds.</p>
+        </div>
+        <div class="mission-item">
+          <h4>Full History Per Employee</h4>
+          <p>Click any employee's name to see their complete payment history, not just what's owed right now.</p>
+        </div>
+        <div class="mission-item">
+          <h4>Works Even Offline</h4>
+          <p>No signal at the front desk? Keep working — every action queues up and syncs automatically the moment you're back online.</p>
+        </div>
+        <div class="mission-item">
+          <h4>Secure by Design</h4>
+          <p>Install it as an app, switch to dark mode, and trust that your hotel's data is fully isolated from every other property on the platform.</p>
+        </div>
+      </div>
+    </div>
+
+    </div><!-- /.top-grid -->
+
+    <!-- 4. Pricing — one flat plan, no tiers -->
+    <div class="card fade-up" id="pricing">
+      <div class="section-header">
+        <h2>Simple, Transparent Pricing</h2>
+        <p>One flat price for any hotel — no tiers, no hidden charges.</p>
+      </div>
+
+      <div class="pricing-single-wrap">
+        <div class="pricing-card">
+          <div class="pricing-name">Maderia Hotel</div>
+          <div class="pricing-tagline">Everything included, for any size property</div>
+          <div class="pricing-amount">2,500 Br <small>upfront</small></div>
+          <div class="pricing-upfront">+ 3,000 Br / month</div>
+          <ul class="pricing-features">
+            <li>Full Admin login — total control</li>
+            <li>Unlimited employees & departments</li>
+            <li>Automatic, prorated payroll cycles</li>
+            <li>Attendance tracking</li>
+            <li>Real-time payroll dashboard & payslips</li>
+            <li>Full payment history per employee</li>
+          </ul>
+          <div class="pricing-best-for">Whether you run a 5-room guesthouse or a 200-room hotel, the price doesn't change.</div>
+          <button class="btn-pricing" onclick="goToForm()">Get Started</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Try It Live -->
+    <div class="card fade-up" id="demo">
+      <div class="section-header">
+        <h2>Try It Live — No Signup Required</h2>
+        <p>Log into the real, live app with a demo account.</p>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-role">Admin — Master Login</div>
+        <div class="credential-desc">Explore the full admin experience: dashboard, employees, departments, attendance, and payroll.</div>
+        <div class="credential-box">
+          <b>Email:</b> demo@gmail.com<br>
+          <b>Password:</b> demo1234
+        </div>
+        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px;">How to use it:</div>
+        <ol class="credential-steps">
+          <li>Log in → lands on your Dashboard (payroll trend chart, quick finder for outstanding payments)</li>
+          <li>Employees tab → add/edit employees, set hire date & job title, assign them to a department; click a name to open their full profile and payment history</li>
+          <li>Divisions tab → create a department, set its payroll cycle length and base pay, then run payroll for that cycle in one click</li>
+          <li>Attendance tab → mark a shift Present/Absent, review the history</li>
+          <li>Payments tab → see this cycle's payments plus anything still unpaid from before, mark Paid/Unpaid, print a payslip</li>
+        </ol>
+        <a class="btn-launch" href="https://maderia-hotel-frontend.vercel.app" target="_blank" rel="noopener">Launch App →</a>
+      </div>
+
+      <div class="demo-note">Questions any time — just reach out using the form below.</div>
+    </div>
+
+    <!-- 6. Get Started Form -->
+    <div class="card fade-up" id="get-started">
+      <div class="section-header">
+          <h2>Ready to Get Started?</h2>
+          <p>Tell us about your hotel and we'll set up your login.</p>
+      </div>
+
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="f94c6963-8d2e-4874-8e55-af7858c72839" />
+        <input type="hidden" name="subject" value="New Maderia Hotel Signup Request!" />
+        <input type="hidden" name="from_name" value="Maderia Hotel Landing Page" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="hotel_name">Hotel Name</label>
+            <input type="text" id="hotel_name" name="hotel_name" class="form-control" placeholder="e.g. Bole Grand Hotel" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Your Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="manager@hotel.et" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Your Phone Number (Optional)</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="0912345678" pattern="0[0-9]{9}" maxlength="10" inputmode="numeric" />
+          </div>
+
+          <div class="form-group">
+            <label for="property_type">Property Type</label>
+            <select id="property_type" name="property_type" class="form-control" required onchange="checkOption(this)">
+              <option value="" disabled selected>Select property type</option>
+              <option value="Guesthouse">Guesthouse</option>
+              <option value="Boutique Hotel">Boutique Hotel</option>
+              <option value="Business Hotel">Business Hotel</option>
+              <option value="Resort">Resort</option>
+              <option value="Other">Other</option>
+            </select>
+            <div id="text-fieldDiv" class="text-field">
+                <input type="text" id="other_textfield" class="form-control" name="extrainput" placeholder="Please specify the property type" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="employee_count">Estimated Employee Count</label>
+          <select id="employee_count" name="employee_count" class="form-control" required>
+            <option value="Under 10">Under 10 employees</option>
+            <option value="10 - 50">10 – 50 employees</option>
+            <option value="50+">50+ employees</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Request My Login</button>
+        <div class="footer-note">We'll reach out within 1 business day to set up your hotel.</div>
+      </form>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    &copy; 2026 Maderia Hotel. Built for Ethiopian hotels.
+  </footer>
+
+  <!-- Dynamic Scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Logic for "Other" dropdown
+      window.checkOption = function(selectedelement) {
+        var textfld = document.getElementById("text-fieldDiv");
+        var textinput = document.getElementById("other_textfield");
+        if (selectedelement.value === "Other") {
+            textfld.style.display = "block";
+            textinput.setAttribute("required", "true");
+        } else {
+            textfld.style.display = "none";
+            textinput.removeAttribute("required");
+        }
+      }
+
+      // Pricing card -> jump to the signup form
+      window.goToForm = function() {
+        var target = document.getElementById("get-started");
+        if (target) { target.scrollIntoView({ behavior: "smooth" }); }
+      }
+
+      // Intersection Observer for Scroll Animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-up').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
